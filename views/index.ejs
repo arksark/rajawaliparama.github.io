@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Viewer</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Data Viewer</h1>
+
+  <form action="/" method="get">
+    <label for="selectedId">Select Employee ID:</label>
+    <select id="selectedId" name="selectedId" required>
+      <% employeeIds.forEach(id => { %>
+        <option value="<%= id %>"><%= id %></option>
+      <% }); %>
+    </select>
+    <button type="submit">Filter by ID</button>
+  </form>
+
+  <form action="/" method="get">
+    <label for="selectedDepartment">Select Department:</label>
+    <select id="selectedDepartment" name="selectedDepartment" required>
+      <% departments.forEach(department => { %>
+        <option value="<%= department %>"><%= department %></option>
+      <% }); %>
+    </select>
+    <button type="submit">Filter by Department</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Date</th>
+        <th>Check-In Time</th>
+        <th>Check-Out Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(entry => { %>
+        <% entry.dates.forEach((date, index) => { %>
+          <tr>
+            <% if (index === 0) { %>
+              <td rowspan="<%= entry.dates.length %>"><%= entry.id %></td>
+              <td rowspan="<%= entry.dates.length %>"><%= entry.name %></td>
+              <td rowspan="<%= entry.dates.length %>"><%= entry.department %></td>
+            <% } %>
+            <td><%= date %></td>
+            <td><%= entry.timeIn[index] %></td>
+            <td><%= entry.timeOut[index] %></td>
+          </tr>
+        <% }); %>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+
+</html>
