@@ -1,0 +1,79 @@
+<!-- views/flash-messages.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flash Messages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f5f5; /* Light background color */
+      color: #333; /* Dark text color */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .flash-container {
+      text-align: center;
+      width: 80%;
+      max-width: 800px;
+      background-color: #ffffff; /* Light background color for flash container */
+      color: #333; /* Dark text color */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect */
+    }
+
+    h1 {
+      font-size: 24px; /* Adjust the font size for h1 */
+    }
+
+    .success-message {
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column; /* Adjusted to a column layout */
+      align-items: center;
+      width: 100%;
+    }
+
+    button {
+      background-color: #3498db; /* Light blue color for buttons */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px; /* Add margin between buttons */
+    }
+
+    button:hover {
+      background-color: #2980b9; /* Darker shade for buttons on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="flash-container">
+    <h1>Password Changed Successfully</h1>
+    <div class="success-message">
+      <%- successMessage.join('<br>') %>
+    </div>
+    <div class="button-container">
+      <!-- Add a button to go back to the dashboard -->
+      <button onclick="location.href='/dashboard'">Go to Dashboard</button>
+      <!-- Add a form with a button to log out -->
+      <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

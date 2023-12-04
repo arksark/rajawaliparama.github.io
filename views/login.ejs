@@ -1,0 +1,79 @@
+<!-- views/login.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajawali Parama Attendance Check - Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f5f5; /* Light background color */
+      color: #333; /* Dark text color */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      text-align: center;
+    }
+
+    .login-box {
+      background-color: #ffffff; /* Light background color for the login box */
+      padding: 20px;
+      border-radius: 5px;
+      width: 400px;
+      margin-top: 20px; /* Adjusted margin to create space between heading and login box */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect */
+    }
+
+    .login-box input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc; /* Light border color */
+      border-radius: 5px;
+      background-color: #f9f9f9; /* Light background color for input fields */
+      color: #333; /* Dark text color for input fields */
+    }
+
+    .login-box button {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db; /* Light blue color for the button */
+      color: white;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #2980b9; /* Darker shade for the button on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Rajawali Parama Cek Absensi</h1>
+    <div class="login-box">
+      <h2>Login</h2>
+      <% if (messages.length > 0) { %>
+        <div class="flash-message" style="color: red;">
+          <%- messages.join('<br>') %>
+        </div>
+      <% } %>
+      <form action="/login" method="post">
+        <input type="text" placeholder="ID Karyawan" name="id" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

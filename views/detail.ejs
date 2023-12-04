@@ -1,0 +1,107 @@
+<% function calculateLateCheckIn(selectedTimeIn, maxArrivalTime) { %>
+    <% const selectedTime = new Date('1970-01-01T' + selectedTimeIn + 'Z'); %>
+    <% const maxArrival = new Date('1970-01-01T' + maxArrivalTime + 'Z'); %>
+    <% const timeDiff = selectedTime - maxArrival; %>
+    <% const minutesLate = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60)); %>
+    <% return minutesLate; %>
+  <% } %>
+  
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f5f5; /* Light background color */
+        color: #333; /* Dark text color */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Adjusted to a column layout */
+        align-items: center;
+        height: 100vh;
+      }
+  
+      .detail-container {
+        text-align: center;
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #ffffff; /* Light background color */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+  
+      h1 {
+        margin-bottom: 20px;
+      }
+  
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+  
+      th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+  
+      th {
+        background-color: #3498db; /* Light blue color for heading */
+        color: white;
+      }
+  
+      .highlight-text {
+        color: #3498db; /* Light blue color for highlighted text */
+        font-weight: bold;
+      }
+  
+      .return-button {
+        background-color: #3498db; /* Light blue color for the return button */
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        text-decoration: none; /* Remove default link underline */
+        display: block; /* Make it a block-level element to move it below the container */
+      }
+  
+      .return-button:hover {
+        background-color: #2980b9; /* Darker shade for the return button on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="detail-container">
+      <h1>Absensi Detail Pada Tanggal <%= selectedDate %></h1>
+      <table>
+        <tr>
+          <th>Jam Datang</th>
+          <th>Jam Pulang</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td><%= selectedTimeIn %></td>
+          <td><%= selectedTimeOut %></td>
+          <td>
+            <% if (isLate) { %>
+              <span class="highlight-text">Telat <%= calculateLateCheckIn(selectedTimeIn, maxArrivalTime) %> menit</span>
+            <% } else { %>
+              Hadir Tepat Waktu
+            <% } %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <a href="/dashboard" class="return-button">Kembali ke Dashboard</a>
+  </body>
+  </html>
+  

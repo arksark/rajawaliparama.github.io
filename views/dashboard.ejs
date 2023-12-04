@@ -1,0 +1,150 @@
+<!-- views/dashboard.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajawali Parama Attendance Check - Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f5f5; /* Light background color */
+      color: #333; /* Dark text color */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column; /* Adjusted to a column layout */
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dashboard-container {
+      text-align: center;
+      display: flex; /* Use flexbox for layout */
+      flex-direction: column; /* Adjusted to a column layout */
+      align-items: center;
+      width: 80%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .user-info {
+      width: 100%; /* Take the full width of the container */
+      background-color: #ffffff; /* Light background color for user info box */
+      color: #333; /* Dark text color */
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect */
+    }
+
+    .user-info div {
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%; /* Take the full width of the container */
+      background-color: #ffffff; /* Light background color for the table */
+      padding: 20px; /* Add padding to the table */
+      border-radius: 5px; /* Add border-radius for rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect */
+      margin: 0; /* Remove default margin */
+    }
+
+    th, td {
+      border: 1px solid #ddd; /* Light border color */
+      padding: 10px;
+      text-align: left;
+      color: #333; /* Dark text color */
+    }
+
+    th {
+      background-color: #3498db; /* Light blue color for heading */
+    }
+
+    .detail-cell {
+      text-align: center; /* Center the content horizontally in the Detail column */
+      display: flex;
+      align-items: center; /* Center the content vertically in the Detail column */
+      justify-content: center; /* Center the content horizontally in the Detail column */
+    }
+
+    .detail-button {
+      background-color: #3498db; /* Light blue color for the Detail button */
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .detail-button:hover {
+      background-color: #2980b9; /* Darker shade for the Detail button on hover */
+    }
+
+    button {
+      background-color: #3498db; /* Light blue color for buttons */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px; /* Add margin to the top of the button */
+    }
+
+    button:hover {
+      background-color: #2980b9; /* Darker shade for buttons on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Rajawali Parama Cek Absensi</h1>
+    <div class="user-info">
+      <% console.log('Success message in template:', successMessage); %>
+      <% if (successMessage && successMessage.length) { %>
+        <div class="success-message">
+          <%- successMessage.join('<br>') %>
+        </div>
+      <% } %>
+      <div><%= name %></div>
+      <div>ID Karyawan: <%= id %></div>
+      <div>Departement: <%= department %></div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Tanggal Absen</th>
+          <th>Waktu Datang</th>
+          <th>Waktu Pulang</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data[0].dates.forEach((date, index) => { %>
+          <tr>
+            <td><%= date %></td>
+            <td><%= data[0].timeIn[index] %></td>
+            <td><%= data[0].timeOut[index] %></td>
+            <td class="detail-cell">
+              <!-- Add the Detail button for each date -->
+              <a href="/detail?date=<%= date %>">
+                <button class="detail-button">Detail</button>
+              </a>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    
+    <!-- Add a change password button -->
+    <button onclick="location.href='/change-password'">Change Password</button>
+    
+    <!-- Add a logout button -->
+    <form action="/logout" method="post">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</body>
+</html>
